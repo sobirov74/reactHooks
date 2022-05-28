@@ -11,11 +11,16 @@ const useLocalStorage = (key, initialValue) => {
     return getInitialValue(key, initialValue);
   });
 
+  const reset = (e) => {
+    e.preventDefault();
+    $value("");
+  };
+
   useEffect(() => {
     localStorage.setItem(key, JSON.stringify(value));
   }, [value]);
 
-  return [value, $value];
+  return [value, $value, reset];
 };
 
 export default useLocalStorage;
