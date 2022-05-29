@@ -2,6 +2,9 @@
   display: flex;
   gap: 10px;
 }
+.paginationBox span {
+  cursor: pointer;
+}
 
 * {
   list-style: none;
