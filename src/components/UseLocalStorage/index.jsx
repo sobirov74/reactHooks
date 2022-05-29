@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import useLocalStorage from "../../hooks/useLocalStorage";
 
 const UseLocalStorage = () => {
@@ -10,6 +10,12 @@ const UseLocalStorage = () => {
     $value(e);
   };
 
+  useEffect(() => {
+    if (localStorage.getItem("name"))
+      $value(JSON.parse(localStorage.getItem("name")));
+  }, []);
+
+  console.log(value);
   const toLocalStorage = (e) => {
     e.preventDefault();
     $name(value);
@@ -17,7 +23,7 @@ const UseLocalStorage = () => {
   return (
     <form>
       <input
-        type="text"
+        type='text'
         value={value}
         onChange={(e) => getName(e.target.value)}
       />

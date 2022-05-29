@@ -13,7 +13,8 @@ const useLocalStorage = (key, initialValue) => {
 
   const reset = (e) => {
     e.preventDefault();
-    $value("");
+    // $value("");
+    localStorage.removeItem(key);
   };
 
   useEffect(() => {
