@@ -20,15 +20,22 @@ const UseLocalStorage = () => {
     e.preventDefault();
     $name(value);
   };
+
+  const resetBtn = (e) => {
+    reset(e);
+    $value("");
+    $name("");
+  };
+
   return (
     <form>
       <input
-        type='text'
+        type="text"
         value={value}
         onChange={(e) => getName(e.target.value)}
       />
       <button onClick={(e) => toLocalStorage(e)}>submit</button>
-      <button onClick={(e) => reset(e)}>reset</button>
+      <button onClick={(e) => resetBtn(e)}>reset</button>
     </form>
   );
 };
