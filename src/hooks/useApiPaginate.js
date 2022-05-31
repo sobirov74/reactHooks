@@ -2,18 +2,26 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-const useApi = ({ api, body }) => {
+const useApiPaginate = ({ api, body = {} }) => {
   const [data, $data] = useState(null);
   const [error, $error] = useState(null);
   const [loading, $loading] = useState(false);
-  const [fetcher, $fetcher] = useState(0);
+  const [page, $page] = useState(1);
+
+  const refetch = () => {
+    $page(page + 1);
+  };
 
   useEffect(() => {
-    if (fetcher > 0) {
+    if (page > 1) {
       const ourRequest = axios.CancelToken.source();
       const fetchData = async () => {
         $loading(true);
-        api({ ...body, cancelToken: ourRequest.token })
+        api({
+          ...body,
+          cancelToken: ourRequest.token,
+          page,
+        })
           .then(({ data: response }) => {
             if (response) {
               $data(response);
@@ -35,9 +43,9 @@ const useApi = ({ api, body }) => {
         ourRequest.cancel();
       };
     }
-  }, [fetcher]);
+  }, [page]);
 
-  return { data, error, loading, refetch: () => $fetcher(fetcher + 1) };
+  return { data, error, loading, refetch, page };
 };
 
-export default useApi;
+export default useApiPaginate;

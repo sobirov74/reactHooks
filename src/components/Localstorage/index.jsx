@@ -6,7 +6,6 @@ const UseLocalStorage = () => {
   const [value, $value] = useState("");
 
   const getName = (e) => {
-    // e.preventDefault();
     $value(e);
   };
 
@@ -15,7 +14,6 @@ const UseLocalStorage = () => {
       $value(JSON.parse(localStorage.getItem("name")));
   }, []);
 
-  console.log(value);
   const toLocalStorage = (e) => {
     e.preventDefault();
     $name(value);

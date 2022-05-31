@@ -1,17 +1,10 @@
 import "./App.css";
 import React, { createContext } from "react";
-import UseLocalStorage from "./components/UseLocalStorage";
-import UseApi from "./components/useApi";
+import MainPage from "./pages/mainpage";
 
-export const AppContext = createContext(null)
+export const AppContext = createContext(null);
 const App = () => {
-
-  return (
-    <div className="container">
-      <UseLocalStorage />
-      <UseApi />
-    </div>
-  );
+  return <MainPage />;
 };
 
 export default App;
