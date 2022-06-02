@@ -11,3 +11,43 @@
   list-style: none;
   text-decoration: none;
 }
+.container {
+  max-width: 1111px;
+  margin: 0 auto;
+  width: 100%;
+}
+.wrap {
+  display: flex;
+}
+.left {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.right {
+  width: 50%;
+}
+.cart {
+  display: flex;
+  flex-direction: column;
+}
+.cartTop {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+.cartTop button {
+  height: 30px;
+}
+.item {
+  display: flex;
+  justify-content: space-between;
+  border: 2px solid black;
+  align-items: center;
+}
+.counter span {
+  margin-left: 5px;
+  margin-right: 5px;
+}

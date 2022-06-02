@@ -2,8 +2,8 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-const useApiPaginate = ({ api, body = {} }) => {
-  const [data, $data] = useState(null);
+const useApiPaginate = ({ api, body = {}, limit }) => {
+  const [data, $data] = useState([]);
   const [error, $error] = useState(null);
   const [loading, $loading] = useState(false);
   const [page, $page] = useState(1);
@@ -21,9 +21,13 @@ const useApiPaginate = ({ api, body = {} }) => {
           ...body,
           cancelToken: ourRequest.token,
           page,
+          limit,
         })
           .then(({ data: response }) => {
             if (response) {
+              // if (page > 1) {
+              //   $data([...data, ...response]);
+              // } else $data(response);
               $data(response);
               if (error) {
                 $error(null);
@@ -45,7 +49,7 @@ const useApiPaginate = ({ api, body = {} }) => {
     }
   }, [page]);
 
-  return { data, error, loading, refetch, page };
+  return { data, error, loading, refetch, page, limit, $data };
 };
 
 export default useApiPaginate;

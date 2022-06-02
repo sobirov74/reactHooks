@@ -1,28 +1,26 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const getInitialValue = (key, initialValue) => {
-  const savedValue = JSON.parse(localStorage.getItem(key));
-  if (savedValue) return savedValue;
+  const savedValue = localStorage.getItem(key);
+  if (savedValue) return JSON.parse(savedValue);
   return initialValue;
 };
 
 const useLocalStorage = (key, initialValue) => {
-  const [value, $value] = useState(() => {
-    return getInitialValue(key, initialValue);
-  });
+  const [value, $value] = useState(() => getInitialValue(key, initialValue));
 
-  const reset = (e) => {
-    e.preventDefault();
-    // $value("");
+  const setValue = (newValue) => {
+    localStorage.setItem(key, JSON.stringify(newValue));
+    $value(newValue);
+  };
+
+  const reset = () => {
+    $value(initialValue);
     localStorage.removeItem(key);
   };
 
-  useEffect(() => {
-    localStorage.setItem(key, JSON.stringify(value));
-  }, [value]);
-
-  return [value, $value, reset];
+  return [value, setValue, reset];
 };
 
 export default useLocalStorage;

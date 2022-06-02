@@ -26,7 +26,7 @@ const UseLocalStorage = () => {
   };
 
   return (
-    <form>
+    <form className="container">
       <input
         type="text"
         value={value}

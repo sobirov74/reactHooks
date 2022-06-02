@@ -6,8 +6,7 @@ import UseApiPaginate from "../../components/Pagination";
 import UseLocalStorage from "../../components/Localstorage";
 import useApi from "../../hooks/useApi";
 
-// const pageSize = 100;
-const limit = 4;
+export const limit = 6;
 
 export const AppContext = createContext(null);
 
@@ -17,24 +16,20 @@ const MainPage = () => {
     loading,
     error,
     refetch,
-  } = useApi({ api: getUrl, body: {} });
-  const [items, $items] = useState([]);
-  // const [lists, $lists] = useState([]);
+  } = useApi({ api: getUrl, body: {}, limit });
+  const [items, $items] = useState(data);
 
   useEffect(() => {
     $items(data);
   }, [data]);
 
   const reload = (e) => {
-    e.preventDefault();
     refetch();
   };
   return (
     <div>
       <UseLocalStorage />
-      <AppContext.Provider
-        value={{ loading, error, $items, items, reload, limit }}
-      >
+      <AppContext.Provider value={{ loading, error, $items, items, reload }}>
         <UseApi />
         <UseApiPaginate />
       </AppContext.Provider>
